@@ -1,12 +1,30 @@
-data class CubeSet (val blue: Int = 0, val red: Int = 0, val green: Int = 0) {
+data class CubeSet(var blue: Int = 0, var red: Int = 0, var green: Int = 0) {
     constructor(line: String) : this() {
+        var results = line.split(",")
 
+        for (result in results) {
+            val el = result.trim().split(" ")
+            when (el.last()) {
+                "blue" -> this.blue = el.first().toInt()
+                "green" -> this.green = el.first().toInt()
+                "red" -> this.red = el.first().toInt()
+            }
+        }
     }
 }
 
-data class Game(val cubeSets: List<CubeSet>) {
+data class Game(var cubeSets: List<CubeSet>) {
+
+    constructor(line: String) : this(listOf()) {
+        val contents = line.split(": ").last()
+
+        for (content in contents.split("; ")){
+            this.cubeSets += CubeSet(content)
+        }
+    }
+
     fun isPossibleWithBag(bag: Bag): Boolean {
-        for (cubeSet in cubeSets){
+        for (cubeSet in cubeSets) {
             if (cubeSet.blue > bag.blue) {
                 return false
             }

@@ -1,4 +1,4 @@
-import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -46,5 +46,11 @@ class Day2Test {
         val bag = Bag(14, 12, 13)
 
         assertEquals(isPossible, game.isPossibleWithBag(bag))
+    }
+
+    @Test
+    fun `create cube set from string`() {
+        val result = CubeSet("3 blue, 4 red")
+        assertEquals(CubeSet(blue = 3, red = 4), result)
     }
 }
