@@ -9,7 +9,7 @@ fun calibrate(input: String): Int {
 
 
 fun main() {
-    val lines = object {}::class.java.getResourceAsStream("input.txt").bufferedReader().readLines()
+    val lines = object {}::class.java.getResourceAsStream("day1/input.txt").bufferedReader().readLines()
     var result = 0
 
     for (line in lines) {

@@ -13,12 +13,14 @@ data class CubeSet(var blue: Int = 0, var red: Int = 0, var green: Int = 0) {
     }
 }
 
-data class Game(var cubeSets: List<CubeSet>) {
+data class Game(var id: Int = 0, var cubeSets: List<CubeSet>) {
 
-    constructor(line: String) : this(listOf()) {
+    constructor(line: String) : this(cubeSets = listOf()) {
         val contents = line.split(": ").last()
 
-        for (content in contents.split("; ")){
+        this.id = line.split(": ").first().split(" ").last().toInt()
+
+        for (content in contents.split("; ")) {
             this.cubeSets += CubeSet(content)
         }
     }
@@ -42,5 +44,16 @@ data class Game(var cubeSets: List<CubeSet>) {
 data class Bag(val blue: Int, val red: Int, val green: Int)
 
 
-class Day2 {
+fun main() {
+    val lines = object {}::class.java.getResourceAsStream("day2/input.txt").bufferedReader().readLines()
+
+    val bag = Bag(red = 12, green = 13, blue = 14)
+    var result = 0
+    for (line in lines) {
+        val game = Game(line)
+        if (game.isPossibleWithBag(bag)) {
+            result += game.id
+        }
+    }
+    println(result)
 }

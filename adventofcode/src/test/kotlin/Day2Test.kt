@@ -11,7 +11,7 @@ class Day2Test {
             return listOf(
                 Arguments.of(
                     Game(
-                        listOf(
+                        cubeSets = listOf(
                             CubeSet(3, 4),
                             CubeSet(red = 1, blue = 6, green = 2),
                             CubeSet(green = 2)
@@ -20,7 +20,7 @@ class Day2Test {
                 ),
                 Arguments.of(
                     Game(
-                        listOf(
+                        cubeSets = listOf(
                             CubeSet(blue = 1, green = 2),
                             CubeSet(red = 1, blue = 4, green = 3),
                             CubeSet(green = 1, blue = 1)
@@ -29,7 +29,7 @@ class Day2Test {
                 ),
                 Arguments.of(
                     Game(
-                        listOf(
+                        cubeSets = listOf(
                             CubeSet(blue = 6, green = 8, red = 20),
                             CubeSet(red = 4, blue = 5, green = 13),
                             CubeSet(green = 5, red = 1)
@@ -52,5 +52,20 @@ class Day2Test {
     fun `create cube set from string`() {
         val result = CubeSet("3 blue, 4 red")
         assertEquals(CubeSet(blue = 3, red = 4), result)
+    }
+
+    @Test
+    fun `create game from string`() {
+        val result = Game("Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green")
+        assertEquals(
+            Game(
+                id = 1,
+                cubeSets = listOf(
+                    CubeSet(blue = 3, red = 4),
+                    CubeSet(green = 2, red = 1, blue = 6),
+                    CubeSet(green = 2)
+                )
+            ), result
+        )
     }
 }
