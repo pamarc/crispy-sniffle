@@ -68,4 +68,15 @@ class Day2Test {
             ), result
         )
     }
+
+    @Test
+    fun `minimum set of cubes`() {
+        val game = Game("Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green")
+
+        val result = game.minimumSetOfCube()
+
+        assertEquals(CubeSet(red = 4, green = 2, blue = 6), result)
+
+        assertEquals(48, result.power())
+    }
 }

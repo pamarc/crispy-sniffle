@@ -11,6 +11,10 @@ data class CubeSet(var blue: Int = 0, var red: Int = 0, var green: Int = 0) {
             }
         }
     }
+
+    fun power(): Int {
+        return blue * red * green
+    }
 }
 
 data class Game(var id: Int = 0, var cubeSets: List<CubeSet>) {
@@ -39,12 +43,19 @@ data class Game(var id: Int = 0, var cubeSets: List<CubeSet>) {
         }
         return true
     }
+
+    fun minimumSetOfCube(): CubeSet {
+        val minimumRed = (cubeSets.map { it.red }).max()
+        val minimumBlue = (cubeSets.map { it.blue }).max()
+        val minimumGreen = (cubeSets.map { it.green }).max()
+        return CubeSet(blue = minimumBlue, red = minimumRed, green = minimumGreen)
+    }
 }
 
 data class Bag(val blue: Int, val red: Int, val green: Int)
 
 
-fun main() {
+fun mainPart1() {
     val lines = object {}::class.java.getResourceAsStream("day2/input.txt").bufferedReader().readLines()
 
     val bag = Bag(red = 12, green = 13, blue = 14)
@@ -54,6 +65,18 @@ fun main() {
         if (game.isPossibleWithBag(bag)) {
             result += game.id
         }
+    }
+    println(result)
+}
+
+fun main(){
+    val lines = object {}::class.java.getResourceAsStream("day2/input.txt").bufferedReader().readLines()
+
+    var result = 0
+    for (line in lines) {
+        val game = Game(line)
+        val minimum = game.minimumSetOfCube()
+        result += minimum.power()
     }
     println(result)
 }
